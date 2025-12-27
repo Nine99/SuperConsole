@@ -7,7 +7,7 @@ let project = Project(
             name: "dummyServer",
             destinations: .iOS,
             product: .app,
-            bundleId: "io.tuist.dummyServer",
+            bundleId: "com.Nine99.dummyServer",
             infoPlist: .extendingDefault(
                 with: [
                     "UILaunchScreen": [

@@ -7,7 +7,7 @@ let project = Project(
             name: "superCon",
             destinations: .iOS,
             product: .app,
-            bundleId: "io.tuist.superCon",
+            bundleId: "com.Nine99.superCon",
             infoPlist: .extendingDefault(
                 with: [
                     "UILaunchScreen": [
@@ -32,7 +32,7 @@ let project = Project(
             name: "superConTests",
             destinations: .iOS,
             product: .unitTests,
-            bundleId: "io.tuist.superConTests",
+            bundleId: "com.Nine99.superConTests",
             infoPlist: .default,
             sources: ["superCon/Tests/**"],
             resources: [],
