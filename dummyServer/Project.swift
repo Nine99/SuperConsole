@@ -5,16 +5,11 @@ let project = Project(
     targets: [
         .target(
             name: "dummyServer",
-            destinations: .iOS,
+            destinations: .macOS,
             product: .app,
             bundleId: "com.Nine99.dummyServer",
             infoPlist: .extendingDefault(
-                with: [
-                    "UILaunchScreen": [
-                        "UIColorName": "",
-                        "UIImageName": "",
-                    ],
-                ]
+                with: [:]
             ),
             sources: ["Sources/**"],
             resources: ["Resources/**"],

@@ -8,6 +8,7 @@ class TCPServer: ObservableObject {
     
     private var listener: NWListener?
     private var port: UInt16 = 8080
+    private var activeConnections: [String: NWConnection] = [:]
     
     func start(port: UInt16) {
         self.port = port
@@ -66,6 +67,9 @@ class TCPServer: ObservableObject {
             self.addMessage("[클라이언트 연결] \(clientInfo)")
         }
         
+        // 연결 추적에 추가
+        activeConnections[clientIDString] = connection
+        
         connection.stateUpdateHandler = { [weak self] state in
             switch state {
             case .ready:
@@ -79,6 +83,7 @@ class TCPServer: ObservableObject {
                     if let index = self.connectedClients.firstIndex(of: clientInfo) {
                         self.connectedClients.remove(at: index)
                     }
+                    self.activeConnections.removeValue(forKey: clientIDString)
                     self.addMessage("[클라이언트 연결 해제] \(clientIDString)")
                 }
             default:
@@ -129,10 +134,21 @@ class TCPServer: ObservableObject {
     }
     
     func stop() {
+        // 모든 활성 연결 닫기
+        for (_, connection) in activeConnections {
+            connection.cancel()
+        }
+        activeConnections.removeAll()
+        
+        // 리스너 중지
         listener?.cancel()
         listener = nil
+        
+        // 상태 초기화
         connectedClients.removeAll()
         isRunning = false
+        
+        addMessage("[서버 중지] 모든 연결이 종료되었습니다.")
     }
     
     func broadcastMessage(_ message: String) {
