@@ -5,6 +5,7 @@ let workspace = Workspace(
     projects: [
         ".",
         "dummyServer",
+        "cmdCon",
     ]
 )
 
