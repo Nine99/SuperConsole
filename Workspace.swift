@@ -6,6 +6,7 @@ let workspace = Workspace(
         ".",
         "dummyServer",
         "cmdCon",
+        "sioCon",
     ]
 )
 
